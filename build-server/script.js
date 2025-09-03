@@ -35,14 +35,15 @@ async function init() {
       recursive: true,
     });
 
-    for (const filePath of distFolderContents) {
+    for (const file of distFolderContents) {
+      const filePath = path.join(distFolderPath,file)
       if (fs.lstatSync(filePath).isDirectory()) continue;
 
       console.log("uploading", filePath);
 
       const command = new PutObjectCommand({
         Bucket: "",
-        Key: `_outputs/${PROJECT_ID}/${filePath}`,
+        Key: `_outputs/${PROJECT_ID}/${file}`,
         Body: fs.createReadStream(filePath),
         ContentType: mime.lookup(filePath),
       });
