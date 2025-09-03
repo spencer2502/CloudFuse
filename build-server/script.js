@@ -42,8 +42,8 @@ async function init() {
       console.log("uploading", filePath);
 
       const command = new PutObjectCommand({
-        Bucket: "",
-        Key: `_outputs/${PROJECT_ID}/${file}`,
+        Bucket: "cloudfuse-outputs",
+        Key: `__outputs/${PROJECT_ID}/${file}`,
         Body: fs.createReadStream(filePath),
         ContentType: mime.lookup(filePath),
       });
